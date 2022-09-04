@@ -1,16 +1,27 @@
 #pragma once
 #include <stdlib.h>
+#include <stdio.h>
 
 typedef enum { false, true } bool;
 
-typedef struct btree {
+typedef struct node {
   int data;
-  struct btree *left;
-  struct btree *right;
+  struct node *left;
+  struct node *right;
+} node;
+
+typedef struct btree {
+  struct node *root;
 } btree;
 
-btree* insert(btree *root, int data);
+btree* createTree();
+
+void insert(btree *root, int data);
+node* insertNode(node* parent, int data, bool right);
+
 
 bool search(btree* root, int data);
+bool searchNode(node* node, int data);
 
-btree* createNode(int data);
+
+node* createNode(int data);

@@ -2,27 +2,44 @@
 
 //definir estrutura de arvore pai dos nós
 
-btree* insert(btree *root, int data) {
-  if(!root) {
-    root = createNode(data);
-    return root;
-  } else if (data <= root->data) {
-    root->left = insert(root->left, data);
+btree* createTree() {
+  btree* tree = malloc(sizeof(tree));
+  return tree;
+}
+
+void insert(btree *tree, int data) {
+  if(!tree->root) {
+    tree->root = createNode(data);
+  } else if (data <= tree->root->data) {
+    tree->root->left = insertNode(tree->root->left, data, false);
   } else {
-    root->right = insert(root->right, data);
+    tree->root->right = insertNode(tree->root->right, data, true);
   }
-  return root;  
 }
 
-bool search(btree* root, int data) {
-  if(!root) return false;
-  else if(root->data == data) return true;
-  else if(data <= root->data) return search(root->left, data);
-  else return search(root->right, data);
+node* insertNode(node* parent, int data, bool right) {
+  if(!parent) {
+    parent = createNode(data);
+  } else if (data <= parent->data) {
+    parent->left = createNode(data);
+  } else {
+    parent->right = createNode(data);
+  }
 }
 
-btree* createNode(int data) {
-  btree *node = (btree*)malloc(sizeof(btree));
+bool search(btree* tree, int data) {
+  return searchNode(tree->root, data);
+}
+
+bool searchNode(node* node, int data) {
+  if(!node) return false;
+  else if(node->data == data) return true;
+  else if(data <= node->data) return searchNode(node->left, data);
+  else return searchNode(node->right, data);
+}
+
+node* createNode(int data) {
+  node *node = malloc(sizeof(node));
   node->data = data;
   node->left = node->right = NULL;
   return node;

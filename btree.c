@@ -2,9 +2,15 @@
 #include "binaryTree.h"
 
 int main() {
-  btree *root = NULL;
+  btree *tree = createTree();
 
-  insert(root, 15);
-  insert(root, 10);
-  insert(root, 20);
+  insert(tree, 15);
+  insert(tree, 10);
+  insert(tree, 20);
+
+  search(tree, 15);
+  search(tree, 20);
+  search(tree, 17);
+
+  return 0;
 }
