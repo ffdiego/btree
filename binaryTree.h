@@ -26,11 +26,15 @@ bnode* createNode(int data);
 bool search(btree* root, int data);
 bool searchNode(bnode* node, int data);
 
-int findMin(btree* tree);
-int findMax(btree* tree);
+
+bnode* findMin(bnode* node);
+bnode* findMax(bnode* node);
+
 
 void print(btree *tree);
 void printNode(bnode *node);
+bnode* removeNode(bnode *node, int value);
+void removeTree(btree *tree);
 
 int getHeight(btree *tree);
 int getHeightNode(bnode *node);

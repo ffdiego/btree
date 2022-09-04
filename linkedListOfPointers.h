@@ -15,6 +15,9 @@ typedef struct List {
 
 List* createList() {
   List* list = (List*)malloc(sizeof(List));
+  list->first=NULL;
+  list->last=NULL;
+  list->size=0;
   return list;
 }
 
@@ -95,31 +98,17 @@ void removeList(List *list) {
   }
 }
 
-void listPrint(List *list) {
-  printf(":: Size: %d ", list->size);
-  if(list->first)
-    printf("| First: %d ", list->first->value);
-  if(list->last)
-    printf("| Last: %d ", list->last->value);
-  printf("::\n");
-
-  Node *node = list->first;
-  while(node) {
-    printf("%d ", node->value);
-    node = node->next;
-  }
-  printf("\n\n");
-}
-
 //Queue specific
-int dequeue(List *list) {
+bnode* dequeue(List *list) {
   if(!list->first)
     return 0;
-  int item = list->first->value;
+  bnode* item = list->first->value;
+  printf("dequeued: %d\n", item->data);
   listRemoveNode(list, list->first);
   return item;
 }
 
-void enqueue(List *list, int value) {
-  listInsert(list, value, 1);
+void enqueue(List *list, bnode* value) {
+  printf("enqueued: %d\n", value->data);
+  listInsert(list, value, 0);
 }

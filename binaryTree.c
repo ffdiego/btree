@@ -48,25 +48,22 @@ bnode* createNode(int data) {
   return node;
 }
 
-int findMin(btree* tree) {
-  bnode* node = tree->root;
-  if(!node) return -1;
-
+bnode* findMin(bnode* node) {
+  if(!node) return NULL;
   while(node && node->left) {
     node = node->left;
   }
 
-  return node->data;
+  return node;
 }
 
-int findMax(btree* tree) {
-  bnode* node = tree->root;
-  if(!node) return -1;
+bnode* findMax(bnode* node) {
+  if(!node) return NULL;
   while(node && node->right) {
     node = node->right;
   }
 
-  return node->data;
+  return node;
 }
 
 void print(btree *tree) {
@@ -129,18 +126,64 @@ void postOrder(bnode *node) {
 }
 
 void traverseTreeByLevel(btree *tree) {
-
-}
-
-void levelOrder(bnode *node) {
-  if(!node) return;
+  if(!tree->root) return;
   List *q = createList();
-  enqueue(q, node);
+  enqueue(q, tree->root);
   while(q->size > 0) {
-    bnode *current = q->first;
+    bnode *current = q->first->value;
     printf("%d ", current->data);
     if(current->left) enqueue(q, current->left);
     if(current->right) enqueue(q, current->right);
-    dequeue(q); 
+    dequeue(q);
+  }
+  free(q);
+  printf("\n");
+}
+
+void removeTree(btree *tree) {
+  if(!tree->root) return;
+  List *q = createList();
+  enqueue(q, tree->root);
+  while(q->size > 0) {
+    bnode *current = q->first->value;
+    if(current->left) enqueue(q, current->left);
+    if(current->right) enqueue(q, current->right);
+    dequeue(q);
+  }
+  free(tree);
+}
+
+bnode* removeNode(bnode *node, int value) {
+  if(!node) return node;
+  else if(value < node->data) node->left = removeNode(node->left, value);
+  else if(value > node->data) node->right = removeNode(node->right, value);
+  else {
+    //case 1: no child
+    if(!node->left && !node->right) {
+       free(node);
+       node = NULL;
+    }
+    //cases 2 and 3: 1 child
+    else if(!node->left) {
+      bnode *temp = node;
+      node = node->right;
+      free(temp);
+      node = node->right;
+    }
+    else if(!node->right) {
+      bnode *temp = node;
+      node = node->left;
+      free(temp);
+      return node->left;
+    } 
+    //case 4: 2 children
+    else {
+      bnode *temp = findMin(node->right);
+      node->data = temp->data;
+      node->right = removeNode(node->right, temp->data);
+    }
+    return node;
   }
 }
+
+void viewOnlyLeftSide(){}
