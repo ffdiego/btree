@@ -16,5 +16,6 @@ int main() {
   
   printf("%d and %d\n", min, max);
 
+  print(tree);
   return 0;
 }

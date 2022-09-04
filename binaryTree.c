@@ -64,3 +64,16 @@ int findMax(btree* tree) {
 
   return node->data;
 }
+
+void print(btree *tree) {
+  if(tree->root)
+    printNode(tree->root);
+}
+
+void printNode(node *node) {
+  if(node) {
+    printNode(node->left);
+    printf("%d \n", node->data);
+    printNode(node->right);
+  }
+}

@@ -26,3 +26,6 @@ bool searchNode(node* node, int data);
 
 int findMin(btree* tree);
 int findMax(btree* tree);
+
+void print(btree *tree);
+void printNode(node *node);
