@@ -19,6 +19,6 @@ int main() {
 
   print(tree);
   printf("Altura:%d\n", getHeight(tree));
-  preOrder(tree->root);
+  traverseTree(tree);
   return 0;
 }

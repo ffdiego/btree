@@ -39,6 +39,7 @@ int getHeightNode(node *node);
 // Pre-Ordem (PLR)
 // Em Ordem  (LPR)
 // Pos Ordem (LRP)
+void traverseTree(btree *tree);
 
 void preOrder(node *parent);
 void inOrder(node *parent);

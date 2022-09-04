@@ -95,10 +95,35 @@ int getHeightNode(node *node) {
   return max(leftHeight, rightHeight) + 1;
 }
 
+void traverseTree(btree *tree) {
+  if(!tree->root) return;
+  printf("\nPre-Order:\n");
+  preOrder(tree->root);
+  printf("\nIn-Order:\n");
+  inOrder(tree->root);
+  printf("\nPost-Order:\n");
+  postOrder(tree->root);
+  printf("\n");
+}
+
 void preOrder(node *node) {
   if(!node) return;
   printf("%d ", node->data);
   preOrder(node->left);
   preOrder(node->right);
+}
+
+void inOrder(node *node) {
+  if(!node) return;
+  inOrder(node->left);
+  printf("%d ", node->data);
+  inOrder(node->right);
+}
+
+void postOrder(node *node) {
+  if(!node) return;
+  postOrder(node->left);
+  postOrder(node->right);
+  printf("%d ", node->data);
 }
 
