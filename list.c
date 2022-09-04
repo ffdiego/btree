@@ -13,6 +13,7 @@ int main() {
   print(list);
   printf("%d\n", dequeue(list));
   print(list);
+  removeList(list);
 
   return 0;
 }

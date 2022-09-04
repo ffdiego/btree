@@ -65,9 +65,20 @@ void removeNode(List *list, Node* nodeToRemove) {
     }
   }
 
+  printf("removing node: %d\n", nodeToRemove->value);
   free(nodeToRemove);
   list->size--;
-} 
+}
+
+void removeList(List *list) {
+  Node *node, *next;
+  node = list->first;
+  while(node) {
+    next = node->next;
+    removeNode(list, node);
+    node = next;
+  }
+}
 
 void print(List *list) {
   printf(":: Size: %d ", list->size);
