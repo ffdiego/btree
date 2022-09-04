@@ -20,10 +20,12 @@ void insert(List *list, int value, int insertAtStart){
   //Procedimento pra uma lista não vazia
   else {
     if(insertAtStart) {
+      list->first->prev = node;
       node->next = list->first;
       list->first = node;
     } else {
       list->last->next = node;
+      node->prev = list->last;
       list->last = node;
     }
   }
@@ -35,34 +37,12 @@ void insert(List *list, int value, int insertAtStart){
 void removeNode(List *list, Node* nodeToRemove) {
   if(!nodeToRemove)
     return;
-
-  Node* prevNode = NULL;
-  Node* node = list->first;
   
-  if(nodeToRemove != node) {
-    //rotina para encontrar o nó que antecede o nó a ser removido
-    while(node->next) {
-      if(node->next == nodeToRemove){
-        prevNode = node;
-        break;
-      }
-      node = node->next;
-    }
+  if(nodeToRemove->prev) nodeToRemove->prev->next = nodeToRemove->next;
+  if(nodeToRemove->next) nodeToRemove->next->prev = nodeToRemove->prev;
 
-    if(nodeToRemove->next) {
-      prevNode->next = nodeToRemove->next;
-    } else {
-      prevNode->next = NULL;
-      list->last = prevNode;
-    } 
-  } else {
-    if(nodeToRemove->next) {
-      list->first = nodeToRemove->next;
-    } else {
-      list->first = NULL;
-      list->last = NULL;
-    }
-  }
+  if(nodeToRemove == list->first) list->first = nodeToRemove->next;
+  if(nodeToRemove == list->last) list->last = nodeToRemove->prev;
 
   free(nodeToRemove);
   list->size--;
