@@ -34,3 +34,12 @@ void printNode(node *node);
 
 int getHeight(btree *tree);
 int getHeightNode(node *node);
+
+// Travessias por profundidade:
+// Pre-Ordem (PLR)
+// Em Ordem  (LPR)
+// Pos Ordem (LRP)
+
+void preOrder(node *parent);
+void inOrder(node *parent);
+void postOrder(node *parent);

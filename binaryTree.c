@@ -95,3 +95,10 @@ int getHeightNode(node *node) {
   return max(leftHeight, rightHeight) + 1;
 }
 
+void preOrder(node *node) {
+  if(!node) return;
+  printf("%d ", node->data);
+  preOrder(node->left);
+  preOrder(node->right);
+}
+
