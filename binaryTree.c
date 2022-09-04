@@ -1,4 +1,5 @@
 #include "binaryTree.h"
+#include "linkedListOfPointers.h"
 
 int max(int a, int b) {
   if(a>=b) return a;
@@ -18,7 +19,7 @@ void insert(btree *tree, int data) {
   }
 }
 
-node* insertNode(node* parent, int data) {
+bnode* insertNode(bnode* parent, int data) {
   if(!parent) {
     return createNode(data);
   } else if (data <= parent->data) {
@@ -33,22 +34,22 @@ bool search(btree* tree, int data) {
   return searchNode(tree->root, data);
 }
 
-bool searchNode(node* node, int data) {
+bool searchNode(bnode* node, int data) {
   if(!node) return false;
   else if(node->data == data) return true;
   else if(data <= node->data) return searchNode(node->left, data);
   else return searchNode(node->right, data);
 }
 
-node* createNode(int data) {
-  node *node = malloc(sizeof(node));
+bnode* createNode(int data) {
+  bnode *node = malloc(sizeof(node));
   node->data = data;
   node->left = node->right = NULL;
   return node;
 }
 
 int findMin(btree* tree) {
-  node* node = tree->root;
+  bnode* node = tree->root;
   if(!node) return -1;
 
   while(node && node->left) {
@@ -59,7 +60,7 @@ int findMin(btree* tree) {
 }
 
 int findMax(btree* tree) {
-  node* node = tree->root;
+  bnode* node = tree->root;
   if(!node) return -1;
   while(node && node->right) {
     node = node->right;
@@ -73,7 +74,7 @@ void print(btree *tree) {
     printNode(tree->root);
 }
 
-void printNode(node *node) {
+void printNode(bnode *node) {
   if(node) {
     printNode(node->left);
     printf("%d \n", node->data);
@@ -86,7 +87,7 @@ int getHeight(btree *tree) {
   return getHeightNode(tree->root);
 }
 
-int getHeightNode(node *node) {
+int getHeightNode(bnode *node) {
   if(!node) return -1;
 
   int leftHeight, rightHeight;
@@ -106,24 +107,40 @@ void traverseTree(btree *tree) {
   printf("\n");
 }
 
-void preOrder(node *node) {
+void preOrder(bnode *node) {
   if(!node) return;
   printf("%d ", node->data);
   preOrder(node->left);
   preOrder(node->right);
 }
 
-void inOrder(node *node) {
+void inOrder(bnode *node) {
   if(!node) return;
   inOrder(node->left);
   printf("%d ", node->data);
   inOrder(node->right);
 }
 
-void postOrder(node *node) {
+void postOrder(bnode *node) {
   if(!node) return;
   postOrder(node->left);
   postOrder(node->right);
   printf("%d ", node->data);
 }
 
+void traverseTreeByLevel(btree *tree) {
+
+}
+
+void levelOrder(bnode *node) {
+  if(!node) return;
+  List *q = createList();
+  enqueue(q, node);
+  while(q->size > 0) {
+    bnode *current = q->first;
+    printf("%d ", current->data);
+    if(current->left) enqueue(q, current->left);
+    if(current->right) enqueue(q, current->right);
+    dequeue(q); 
+  }
+}

@@ -4,14 +4,14 @@
 
 typedef enum { false, true } bool;
 
-typedef struct node {
+typedef struct bnode {
   int data;
-  struct node *left;
-  struct node *right;
-} node;
+  struct bnode *left;
+  struct bnode *right;
+} bnode;
 
 typedef struct btree {
-  struct node *root;
+  struct bnode *root;
 } btree;
 
 btree* createTree();
@@ -19,21 +19,21 @@ btree* createTree();
 int max(int, int);
 
 void insert(btree *root, int data);
-node* insertNode(node* parent, int data);
+bnode* insertNode(bnode* parent, int data);
 
-node* createNode(int data);
+bnode* createNode(int data);
 
 bool search(btree* root, int data);
-bool searchNode(node* node, int data);
+bool searchNode(bnode* node, int data);
 
 int findMin(btree* tree);
 int findMax(btree* tree);
 
 void print(btree *tree);
-void printNode(node *node);
+void printNode(bnode *node);
 
 int getHeight(btree *tree);
-int getHeightNode(node *node);
+int getHeightNode(bnode *node);
 
 // Travessias por profundidade:
 // Pre-Ordem (PLR)
@@ -41,6 +41,9 @@ int getHeightNode(node *node);
 // Pos Ordem (LRP)
 void traverseTree(btree *tree);
 
-void preOrder(node *parent);
-void inOrder(node *parent);
-void postOrder(node *parent);
+void preOrder(bnode *parent);
+void inOrder(bnode *parent);
+void postOrder(bnode *parent);
+
+void traverseTreeByLevel(btree *tree);
+void levelOrder(bnode *node);

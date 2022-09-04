@@ -20,5 +20,7 @@ int main() {
   print(tree);
   printf("Altura:%d\n", getHeight(tree));
   traverseTree(tree);
+  printf("\nby level now:\n");
+  traverseTreeByLevel(tree);
   return 0;
 }
