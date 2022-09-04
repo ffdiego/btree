@@ -4,13 +4,17 @@
 int main() {
   btree *tree = createTree();
 
-  insert(tree, 15);
-  insert(tree, 10);
   insert(tree, 20);
-
-  search(tree, 15);
-  search(tree, 20);
-  search(tree, 17);
+  insert(tree, 7);
+  insert(tree, 52);
+  insert(tree, 99);
+  insert(tree, 12);
+  insert(tree, 32);
+  insert(tree, 40);
+  int min = findMin(tree);
+  int max = findMax(tree);
+  
+  printf("%d and %d\n", min, max);
 
   return 0;
 }

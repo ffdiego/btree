@@ -10,21 +10,20 @@ btree* createTree() {
 void insert(btree *tree, int data) {
   if(!tree->root) {
     tree->root = createNode(data);
-  } else if (data <= tree->root->data) {
-    tree->root->left = insertNode(tree->root->left, data, false);
   } else {
-    tree->root->right = insertNode(tree->root->right, data, true);
+    insertNode(tree->root, data);
   }
 }
 
-node* insertNode(node* parent, int data, bool right) {
+node* insertNode(node* parent, int data) {
   if(!parent) {
-    parent = createNode(data);
+    return createNode(data);
   } else if (data <= parent->data) {
-    parent->left = createNode(data);
+    parent->left = insertNode(parent->left, data);
   } else {
-    parent->right = createNode(data);
+    parent->right = insertNode(parent->right, data);
   }
+  return parent;
 }
 
 bool search(btree* tree, int data) {
@@ -43,4 +42,25 @@ node* createNode(int data) {
   node->data = data;
   node->left = node->right = NULL;
   return node;
+}
+
+int findMin(btree* tree) {
+  node* node = tree->root;
+  if(!node) return -1;
+
+  while(node && node->left) {
+    node = node->left;
+  }
+
+  return node->data;
+}
+
+int findMax(btree* tree) {
+  node* node = tree->root;
+  if(!node) return -1;
+  while(node && node->right) {
+    node = node->right;
+  }
+
+  return node->data;
 }

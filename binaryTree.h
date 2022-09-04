@@ -17,11 +17,12 @@ typedef struct btree {
 btree* createTree();
 
 void insert(btree *root, int data);
-node* insertNode(node* parent, int data, bool right);
+node* insertNode(node* parent, int data);
 
+node* createNode(int data);
 
 bool search(btree* root, int data);
 bool searchNode(node* node, int data);
 
-
-node* createNode(int data);
+int findMin(btree* tree);
+int findMax(btree* tree);
