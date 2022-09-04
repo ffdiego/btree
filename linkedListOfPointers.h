@@ -103,12 +103,12 @@ bnode* dequeue(List *list) {
   if(!list->first)
     return 0;
   bnode* item = list->first->value;
-  printf("dequeued: %d\n", item->data);
+  //printf("dequeued: %d\n", item->data);
   listRemoveNode(list, list->first);
   return item;
 }
 
 void enqueue(List *list, bnode* value) {
-  printf("enqueued: %d\n", value->data);
+  //printf("enqueued: %d\n", value->data);
   listInsert(list, value, 0);
 }
