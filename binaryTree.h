@@ -16,6 +16,8 @@ typedef struct btree {
 
 btree* createTree();
 
+int max(int, int);
+
 void insert(btree *root, int data);
 node* insertNode(node* parent, int data);
 
@@ -29,3 +31,6 @@ int findMax(btree* tree);
 
 void print(btree *tree);
 void printNode(node *node);
+
+int getHeight(btree *tree);
+int getHeightNode(node *node);

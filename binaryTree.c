@@ -1,6 +1,9 @@
 #include "binaryTree.h"
 
-//definir estrutura de arvore pai dos nós
+int max(int a, int b) {
+  if(a>=b) return a;
+  return b;
+}
 
 btree* createTree() {
   btree* tree = malloc(sizeof(tree));
@@ -77,3 +80,18 @@ void printNode(node *node) {
     printNode(node->right);
   }
 }
+
+int getHeight(btree *tree) {
+  if(!tree->root) return 0;
+  return getHeightNode(tree->root);
+}
+
+int getHeightNode(node *node) {
+  if(!node) return -1;
+
+  int leftHeight, rightHeight;
+  leftHeight = getHeightNode(node->left);
+  rightHeight = getHeightNode(node->right);
+  return max(leftHeight, rightHeight) + 1;
+}
+
