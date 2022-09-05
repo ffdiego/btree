@@ -186,4 +186,20 @@ bnode* removeNode(bnode *node, int value) {
   }
 }
 
-void viewOnlyLeftSide(){}
+void printLeftView(btree *tree) {
+  if(!tree->root) return;
+  int maxLevel = 0;
+  leftView(tree->root, 1, &maxLevel);
+}
+
+void leftView(bnode* node, int level, int *maxLevel) {
+  if(!node) return;
+  
+  if(level > *maxLevel) {
+    printf("%d ", node->data);
+    *maxLevel = level;
+  }
+
+  leftView(node->left, level + 1, maxLevel);
+  leftView(node->right, level + 1, maxLevel);
+}

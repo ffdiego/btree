@@ -51,3 +51,6 @@ void postOrder(bnode *parent);
 
 void traverseTreeByLevel(btree *tree);
 void levelOrder(bnode *node);
+
+void printLeftView(btree *tree);
+void leftView(bnode* node, int level, int *maxLevel);

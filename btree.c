@@ -13,12 +13,6 @@ int main() {
   insert(tree, 40);
   insert(tree, 42);
 
-  print(tree);
-  printf("Altura:%d\n", getHeight(tree));
-  traverseTree(tree);
-  printf("\nby level now:\n");
-  traverseTreeByLevel(tree);
-  removeNode(tree->root, 20);
-  traverseTree(tree);
+  printLeftView(tree);
   return 0;
 }
